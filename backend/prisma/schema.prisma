@@ -1,0 +1,81 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  STUDENT
+  ORGANIZER
+}
+
+enum Category {
+  HACKATHON
+  INTERNSHIP
+  WORKSHOP
+  SCHOLARSHIP
+  COMPETITION
+  CLUB_RECRUITMENT
+}
+
+model User {
+  id            Int           @id @default(autoincrement())
+
+  name          String
+  email         String        @unique
+  password      String
+
+  role          Role          @default(STUDENT)
+
+  opportunities Opportunity[]
+  bookmarks     Bookmark[]
+
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+}
+
+model Opportunity {
+  id               Int          @id @default(autoincrement())
+
+  title            String
+  description      String       @db.Text
+
+  category         Category
+
+  deadline         DateTime
+  registrationLink String
+
+  bannerUrl        String?
+
+  organizerId      Int
+  organizer User @relation(fields: [organizerId], references: [id], onDelete: Cascade)
+
+  bookmarks         Bookmark[]
+
+  createdAt         DateTime    @default(now())
+  updatedAt         DateTime    @updatedAt
+}
+
+model Bookmark {
+  id               Int          @id @default(autoincrement())
+
+  userId           Int
+  opportunityId    Int
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  opportunity Opportunity @relation(fields: [opportunityId], references: [id], onDelete: Cascade)
+
+  createdAt        DateTime     @default(now())
+
+  @@unique([userId, opportunityId])
+}
