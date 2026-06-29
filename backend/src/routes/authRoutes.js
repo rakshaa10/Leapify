@@ -8,6 +8,10 @@ const {
 
 const router = express.Router();
 
+const authMiddleware = require("../middleware/authMiddleware");
+
+router.get("/me", authMiddleware, getCurrentUser);
+
 //temporary start
 
 //temporary end
