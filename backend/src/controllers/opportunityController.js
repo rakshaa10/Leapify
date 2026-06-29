@@ -2,7 +2,28 @@ const prisma = require("../lib/prisma");
 
 const getAllOpportunities = async (req, res) => {
   try {
+    const { search, category } = req.query;
+
     const opportunities = await prisma.opportunity.findMany({
+      where: {
+        AND: [
+          search
+            ? {
+                title: {
+                  contains: search,
+                  mode: "insensitive",
+                },
+              }
+            : {},
+
+          category
+            ? {
+                category: category,
+              }
+            : {},
+        ],
+      },
+
       include: {
         organizer: {
           select: {
@@ -12,6 +33,7 @@ const getAllOpportunities = async (req, res) => {
           },
         },
       },
+
       orderBy: {
         createdAt: "desc",
       },
