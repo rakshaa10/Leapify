@@ -54,9 +54,79 @@ const addBookmark = async (req, res) => {
   }
 };
 
-const removeBookmark = async (req, res) => {};
+const removeBookmark = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const opportunityId = parseInt(req.params.opportunityId);
 
-const getBookmarks = async (req, res) => {};
+    const bookmark = await prisma.bookmark.findUnique({
+      where: {
+        userId_opportunityId: {
+          userId,
+          opportunityId,
+        },
+      },
+    });
+
+    if (!bookmark) {
+      return res.status(404).json({
+        message: "Bookmark not found",
+      });
+    }
+
+    await prisma.bookmark.delete({
+      where: {
+        userId_opportunityId: {
+          userId,
+          opportunityId,
+        },
+      },
+    });
+
+    res.status(200).json({
+      message: "Bookmark removed successfully",
+    });
+  } catch (error) {
+    console.error(error);
+
+    res.status(500).json({
+      message: "Internal server error",
+    });
+  }
+};
+
+const getBookmarks = async (req, res) => {
+  try {
+    const userId = req.user.id;
+
+    const bookmarks = await prisma.bookmark.findMany({
+      where: {
+        userId,
+      },
+      include: {
+        opportunity: {
+          include: {
+            organizer: {
+              select: {
+                id: true,
+                name: true,
+                email: true,
+              },
+            },
+          },
+        },
+      },
+    });
+
+    res.status(200).json(bookmarks);
+  } catch (error) {
+    console.error(error);
+
+    res.status(500).json({
+      message: "Internal server error",
+    });
+  }
+};
 
 module.exports = {
   addBookmark,
