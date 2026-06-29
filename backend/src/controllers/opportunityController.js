@@ -1,9 +1,30 @@
 const prisma = require("../lib/prisma");
 
 const getAllOpportunities = async (req, res) => {
-  res.json({
-    message: "Get all opportunities controller working",
-  });
+  try {
+    const opportunities = await prisma.opportunity.findMany({
+      include: {
+        organizer: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+          },
+        },
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+
+    res.status(200).json(opportunities);
+  } catch (error) {
+    console.error(error);
+
+    res.status(500).json({
+      message: "Internal server error",
+    });
+  }
 };
 
 const getOpportunityById = async (req, res) => {
