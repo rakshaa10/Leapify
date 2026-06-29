@@ -13,9 +13,39 @@ const getOpportunityById = async (req, res) => {
 };
 
 const createOpportunity = async (req, res) => {
-  res.json({
-    message: "Create opportunity controller working",
-  });
+  try {
+    const {
+      title,
+      description,
+      category,
+      deadline,
+      registrationLink,
+      bannerUrl,
+    } = req.body;
+
+    const opportunity = await prisma.opportunity.create({
+      data: {
+        title,
+        description,
+        category,
+        deadline: new Date(deadline),
+        registrationLink,
+        bannerUrl,
+        organizerId: req.user.id,
+      },
+    });
+
+    res.status(201).json({
+      message: "Opportunity created successfully",
+      opportunity,
+    });
+  } catch (error) {
+    console.error(error);
+
+    res.status(500).json({
+      message: "Internal server error",
+    });
+  }
 };
 
 const updateOpportunity = async (req, res) => {
