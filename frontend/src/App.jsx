@@ -49,6 +49,15 @@ function App() {
             </OrganizerRoute>
           }
         />
+
+        <Route
+          path="/edit-opportunity/:id"
+          element={
+            <OrganizerRoute>
+              <CreateOpportunityPage />
+            </OrganizerRoute>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );

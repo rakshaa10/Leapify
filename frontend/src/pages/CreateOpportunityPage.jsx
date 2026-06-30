@@ -1,36 +1,84 @@
 import Navbar from "../components/Navbar";
-import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 import axios from "../api/axios";
 
 const CreateOpportunityPage = () => {
   const navigate = useNavigate();
 
+  const { id } = useParams();
+
+  const isEditMode = Boolean(id);
+
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("HACKATHON");
   const [deadline, setDeadline] = useState("");
   const [description, setDescription] = useState("");
   const [registrationLink, setRegistrationLink] = useState("");
+
+  useEffect(() => {
+    const fetchOpportunity = async () => {
+      if (!isEditMode) return;
+
+      try {
+        const response = await axios.get(`/opportunities/${id}`);
+
+        const opportunity = response.data;
+
+        setTitle(opportunity.title);
+        setCategory(opportunity.category);
+        setDeadline(opportunity.deadline.split("T")[0]);
+        setDescription(opportunity.description);
+        setRegistrationLink(opportunity.registrationLink);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchOpportunity();
+  }, [id, isEditMode]);
+
   const handleSubmit = async () => {
     try {
-      await axios.post(
-        "/opportunities",
-        {
-          title,
-          category,
-          deadline,
-          description,
-          registrationLink,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
+      if (isEditMode) {
+        await axios.put(
+          `/opportunities/${id}`,
+          {
+            title,
+            category,
+            deadline,
+            description,
+            registrationLink,
           },
-        },
-      );
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          },
+        );
 
-      alert("Opportunity created successfully");
+        alert("Opportunity updated successfully");
+      } else {
+        await axios.post(
+          "/opportunities",
+          {
+            title,
+            category,
+            deadline,
+            description,
+            registrationLink,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          },
+        );
+
+        alert("Opportunity created successfully");
+      }
+
 
       navigate("/dashboard");
     } catch (error) {
@@ -75,7 +123,7 @@ const CreateOpportunityPage = () => {
               marginBottom: "8px",
             }}
           >
-            Post an opportunity
+            {isEditMode ? "Edit opportunity" : "Post an opportunity"}
           </h1>
 
           <p
@@ -83,7 +131,9 @@ const CreateOpportunityPage = () => {
               color: "#9CA3AF",
             }}
           >
-            Fill in the details below. Students will see this on the home feed.
+            {isEditMode
+              ? "Update your opportunity details."
+              : "Fill in the details below. Students will see this on the home feed."}
           </p>
         </div>
 
@@ -263,7 +313,7 @@ const CreateOpportunityPage = () => {
               cursor: "pointer",
             }}
           >
-            Post Opportunity
+            {isEditMode ? "Update Opportunity" : "Post Opportunity"}
           </button>
         </div>
       </div>

@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+
 import axios from "../api/axios";
 import Navbar from "../components/Navbar";
 
 const BookmarksPage = () => {
   const [bookmarks, setBookmarks] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const fetchBookmarks = async () => {
     try {
@@ -14,8 +17,10 @@ const BookmarksPage = () => {
       });
 
       setBookmarks(response.data);
+      setLoading(false);
     } catch (error) {
       console.error(error);
+      setLoading(false);
     }
   };
 
@@ -40,6 +45,23 @@ const BookmarksPage = () => {
       console.error(error);
     }
   };
+
+  if (loading) {
+    return (
+      <>
+        <Navbar />
+
+        <h2
+          style={{
+            textAlign: "center",
+            marginTop: "100px",
+          }}
+        >
+          Loading bookmarks...
+        </h2>
+      </>
+    );
+  }
 
   return (
     <>
@@ -67,28 +89,43 @@ const BookmarksPage = () => {
           <h3>No bookmarks yet.</h3>
         ) : (
           bookmarks.map((bookmark) => (
-            <div
+            <Link
               key={bookmark.id}
+              to={`/opportunity/${bookmark.opportunity.id}`}
               style={{
-                border: "1px solid #ccc",
-                padding: "20px",
-                marginBottom: "20px",
-                borderRadius: "10px",
+                textDecoration: "none",
+                color: "inherit",
               }}
             >
-              <h3>{bookmark.opportunity.title}</h3>
+              <div
+                style={{
+                  border: "1px solid #ccc",
+                  padding: "20px",
+                  marginBottom: "20px",
+                  borderRadius: "10px",
+                }}
+              >
+                <h3>{bookmark.opportunity.title}</h3>
 
-              <p>{bookmark.opportunity.category}</p>
+                <p>{bookmark.opportunity.category}</p>
 
-              <p>
-                Closes{" "}
-                {new Date(bookmark.opportunity.deadline).toLocaleDateString()}
-              </p>
+                <p>
+                  Closes{" "}
+                  {new Date(bookmark.opportunity.deadline).toLocaleDateString()}
+                </p>
 
-              <button onClick={() => removeBookmark(bookmark.opportunity.id)}>
-                Remove Bookmark
-              </button>
-            </div>
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    removeBookmark(bookmark.opportunity.id);
+                  }}
+                >
+                  Remove Bookmark
+                </button>
+              </div>
+            </Link>
           ))
         )}
       </div>

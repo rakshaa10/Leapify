@@ -1,10 +1,9 @@
 import Navbar from "../components/Navbar";
 
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 import { useAuth } from "../context/AuthContext";
-import { useParams } from "react-router-dom";
 import axios from "../api/axios";
 
 const OpportunityDetailsPage = () => {
@@ -75,6 +74,7 @@ const { user } = useAuth();
       >
         {/* Back Button */}
         <p
+          onClick={() => navigate(-1)}
           style={{
             color: "#6B7280",
             cursor: "pointer",
@@ -142,6 +142,13 @@ const { user } = useAuth();
             }}
           >
             <button
+              onClick={() => {
+                if (opportunity.registrationLink) {
+                  window.open(opportunity.registrationLink, "_blank");
+                } else {
+                  alert("Registration link not available.");
+                }
+              }}
               style={{
                 padding: "14px 24px",
                 backgroundColor: "#2563EB",

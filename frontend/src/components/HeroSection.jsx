@@ -1,6 +1,6 @@
 import SearchBar from "./SearchBar";
 import CategoryFilter from "./CategoryFilter";
-const HeroSection = () => {
+const HeroSection = ({ search, setSearch, category, setCategory }) => {
   return (
     <section
       style={{
@@ -38,8 +38,8 @@ const HeroSection = () => {
       >
         Hackathons, internships, workshops, scholarships — all in one place.
       </p>
-      <SearchBar />
-      <CategoryFilter />
+      <SearchBar search={search} setSearch={setSearch} />
+      <CategoryFilter category={category} setCategory={setCategory} />
     </section>
   );
 };

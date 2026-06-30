@@ -1,4 +1,4 @@
-const SearchBar = () => {
+const SearchBar = ({ search, setSearch }) => {
   return (
     <div
       style={{
@@ -10,6 +10,8 @@ const SearchBar = () => {
     >
       <input
         type="text"
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
         placeholder="Search by title, club, or keyword..."
         style={{
           width: "500px",

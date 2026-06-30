@@ -6,9 +6,9 @@ import axios from "../api/axios";
 
 const DashboardPage = () => {
   const [opportunities, setOpportunities] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    
     const fetchMyOpportunities = async () => {
       try {
         const response = await axios.get("/opportunities/my-opportunities", {
@@ -18,8 +18,10 @@ const DashboardPage = () => {
         });
 
         setOpportunities(response.data);
+        setLoading(false);
       } catch (error) {
         console.error(error);
+        setLoading(false);
       }
     };
 
@@ -49,6 +51,24 @@ const DashboardPage = () => {
       alert(error.response?.data?.message || "Failed to delete opportunity");
     }
   };
+
+  if (loading) {
+    return (
+      <>
+        <Navbar />
+
+        <h2
+          style={{
+            textAlign: "center",
+            marginTop: "100px",
+            color: "#FFFFFF",
+          }}
+        >
+          Loading dashboard...
+        </h2>
+      </>
+    );
+  }
 
   return (
     <>
@@ -112,83 +132,137 @@ const DashboardPage = () => {
           </button>
         </Link>
 
-        {/* Opportunity List */}
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            gap: "20px",
-          }}
-        >
-          {opportunities.map((opportunity) => (
-            <div
-              key={opportunity.id}
+        {/* Empty State */}
+        {opportunities.length === 0 ? (
+          <div
+            style={{
+              textAlign: "center",
+              padding: "60px 20px",
+              border: "1px dashed #4B5563",
+              borderRadius: "14px",
+            }}
+          >
+            <h2
               style={{
-                backgroundColor: "#1F2937",
-                border: "1px solid #374151",
-                borderRadius: "14px",
-                padding: "20px",
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
+                color: "#FFFFFF",
+                marginBottom: "10px",
               }}
             >
-              <div>
-                <h3
-                  style={{
-                    color: "white",
-                    marginBottom: "8px",
-                  }}
-                >
-                  {opportunity.title}
-                </h3>
+              No opportunities yet
+            </h2>
 
-                <p
-                  style={{
-                    color: "#9CA3AF",
-                  }}
-                >
-                  {opportunity.category} •{" "}
-                  {new Date(opportunity.deadline).toLocaleDateString()}
-                </p>
-              </div>
+            <p
+              style={{
+                color: "#9CA3AF",
+                marginBottom: "25px",
+              }}
+            >
+              You haven't posted any opportunities yet.
+            </p>
 
-              <div
+            <Link to="/create-opportunity">
+              <button
                 style={{
-                  display: "flex",
-                  gap: "12px",
+                  padding: "12px 20px",
+                  backgroundColor: "#2563EB",
+                  color: "white",
+                  border: "none",
+                  borderRadius: "10px",
+                  cursor: "pointer",
                 }}
               >
-                <button
-                  style={{
-                    padding: "10px 18px",
-                    borderRadius: "8px",
-                    border: "1px solid #4B5563",
-                    backgroundColor: "#374151",
-                    color: "white",
-                    cursor: "pointer",
-                  }}
-                >
-                  Edit
-                </button>
+                Post Your First Opportunity
+              </button>
+            </Link>
+          </div>
+        ) : (
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "20px",
+            }}
+          >
+            {opportunities.map((opportunity) => (
+              <div
+                key={opportunity.id}
+                style={{
+                  backgroundColor: "#1F2937",
+                  border: "1px solid #374151",
+                  borderRadius: "14px",
+                  padding: "20px",
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                <div>
+                  <Link
+                    to={`/opportunity/${opportunity.id}`}
+                    style={{
+                      textDecoration: "none",
+                    }}
+                  >
+                    <h3
+                      style={{
+                        color: "white",
+                        marginBottom: "8px",
+                        cursor: "pointer",
+                      }}
+                    >
+                      {opportunity.title}
+                    </h3>
+                  </Link>
 
-                <button
-                  onClick={() => handleDelete(opportunity.id)}
+                  <p
+                    style={{
+                      color: "#9CA3AF",
+                    }}
+                  >
+                    {opportunity.category} •{" "}
+                    {new Date(opportunity.deadline).toLocaleDateString()}
+                  </p>
+                </div>
+
+                <div
                   style={{
-                    padding: "10px 18px",
-                    borderRadius: "8px",
-                    border: "1px solid #4B5563",
-                    backgroundColor: "#DC2626",
-                    color: "white",
-                    cursor: "pointer",
+                    display: "flex",
+                    gap: "12px",
                   }}
                 >
-                  Delete
-                </button>
+                  <Link to={`/edit-opportunity/${opportunity.id}`}>
+                    <button
+                      style={{
+                        padding: "10px 18px",
+                        borderRadius: "8px",
+                        border: "1px solid #4B5563",
+                        backgroundColor: "#374151",
+                        color: "white",
+                        cursor: "pointer",
+                      }}
+                    >
+                      Edit
+                    </button>
+                  </Link>
+
+                  <button
+                    onClick={() => handleDelete(opportunity.id)}
+                    style={{
+                      padding: "10px 18px",
+                      borderRadius: "8px",
+                      border: "1px solid #4B5563",
+                      backgroundColor: "#DC2626",
+                      color: "white",
+                      cursor: "pointer",
+                    }}
+                  >
+                    Delete
+                  </button>
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
     </>
   );
