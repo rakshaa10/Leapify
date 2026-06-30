@@ -10,10 +10,12 @@ import BookmarksPage from "./pages/BookmarksPage";
 import DashboardPage from "./pages/DashboardPage";
 import CreateOpportunityPage from "./pages/CreateOpportunityPage";
 
+import ProtectedRoute from "./components/ProtectedRoute";
+import OrganizerRoute from "./components/OrganizerRoute";
+
 function App() {
   return (
     <BrowserRouter>
-
       <Routes>
         <Route path="/" element={<HomePage />} />
 
@@ -21,9 +23,32 @@ function App() {
 
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
-        <Route path="/bookmarks" element={<BookmarksPage />} />
-        <Route path="/dashboard" element={<DashboardPage />} />
-        <Route path="/create-opportunity" element={<CreateOpportunityPage />} />
+        <Route
+          path="/bookmarks"
+          element={
+            <ProtectedRoute>
+              <BookmarksPage />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/dashboard"
+          element={
+            <OrganizerRoute>
+              <DashboardPage />
+            </OrganizerRoute>
+          }
+        />
+
+        <Route
+          path="/create-opportunity"
+          element={
+            <OrganizerRoute>
+              <CreateOpportunityPage />
+            </OrganizerRoute>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );
