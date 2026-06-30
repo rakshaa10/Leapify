@@ -13,7 +13,6 @@ import CreateOpportunityPage from "./pages/CreateOpportunityPage";
 function App() {
   return (
     <BrowserRouter>
-      <Navbar />
 
       <Routes>
         <Route path="/" element={<HomePage />} />
