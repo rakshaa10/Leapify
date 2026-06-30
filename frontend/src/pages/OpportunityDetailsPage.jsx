@@ -1,11 +1,18 @@
 import Navbar from "../components/Navbar";
 
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+import { useAuth } from "../context/AuthContext";
 import { useParams } from "react-router-dom";
 import axios from "../api/axios";
 
 const OpportunityDetailsPage = () => {
   const { id } = useParams();
+
+const navigate = useNavigate();
+
+const { user } = useAuth();
 
   const [opportunity, setOpportunity] = useState(null);
 
@@ -24,7 +31,28 @@ const OpportunityDetailsPage = () => {
 
     fetchOpportunity();
   }, [id]);
+  const handleBookmark = async () => {
+    if (!user) {
+      navigate("/login");
+      return;
+    }
 
+    try {
+      await axios.post(
+        `/bookmarks/${id}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        },
+      );
+
+      alert("Opportunity bookmarked successfully");
+    } catch (error) {
+      alert(error.response?.data?.message || "Failed to bookmark opportunity");
+    }
+  };
   if (!opportunity) {
     return (
       <>
@@ -127,6 +155,7 @@ const OpportunityDetailsPage = () => {
             </button>
 
             <button
+              onClick={handleBookmark}
               style={{
                 padding: "14px 24px",
                 backgroundColor: "white",
