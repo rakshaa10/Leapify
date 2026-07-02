@@ -9,9 +9,9 @@ import axios from "../api/axios";
 const OpportunityDetailsPage = () => {
   const { id } = useParams();
 
-const navigate = useNavigate();
+  const navigate = useNavigate();
 
-const { user } = useAuth();
+  const { user } = useAuth();
 
   const [opportunity, setOpportunity] = useState(null);
 
@@ -30,6 +30,7 @@ const { user } = useAuth();
 
     fetchOpportunity();
   }, [id]);
+
   const handleBookmark = async () => {
     if (!user) {
       navigate("/login");
@@ -52,6 +53,7 @@ const { user } = useAuth();
       alert(error.response?.data?.message || "Failed to bookmark opportunity");
     }
   };
+
   if (!opportunity) {
     return (
       <>
@@ -67,65 +69,93 @@ const { user } = useAuth();
 
       <div
         style={{
-          maxWidth: "1000px",
-          margin: "40px auto",
-          padding: "20px",
+          maxWidth: "1050px",
+          width: "100%",
+          margin: "0 auto",
+          padding: "40px 24px 80px",
+          boxSizing: "border-box",
+          backgroundColor: "#F0F4F8",
+          minHeight: "100vh",
         }}
       >
         {/* Back Button */}
-        <p
+        <button
           onClick={() => navigate(-1)}
+          onMouseEnter={(e) => {
+            e.target.style.backgroundColor = "#d0edfa";
+          }}
+          onMouseLeave={(e) => {
+            e.target.style.backgroundColor = "#FFFFFF";
+          }}
           style={{
-            color: "#6B7280",
+            display: "inline-flex",
+            alignItems: "center",
+            gap: "8px",
+            padding: "10px 18px",
+            border: "1px solid #E2E8F0",
+            borderRadius: "12px",
+            backgroundColor: "#FFFFFF",
+            color: "#475569",
+            fontWeight: "500",
             cursor: "pointer",
-            marginBottom: "20px",
+            marginBottom: "32px",
+            transition: "all 0.2s ease",
           }}
         >
           ← Back to opportunities
-        </p>
+        </button>
 
+        {/* Banner */}
         {opportunity.bannerUrl ? (
           <img
             src={opportunity.bannerUrl}
             alt={opportunity.title}
             style={{
               width: "100%",
-              height: "250px",
+              height: "260px",
               objectFit: "cover",
-              borderRadius: "20px",
-              marginBottom: "30px",
-              cursor: "pointer",
-              transition: "0.2s ease",
+              borderRadius: "24px",
+              marginBottom: "40px",
             }}
           />
         ) : (
           <div
             style={{
-              height: "250px",
+              width: "100%",
+              height: "260px",
               backgroundColor: "#2563EB",
-              borderRadius: "20px",
-              marginBottom: "30px",
+              borderRadius: "24px",
+              marginBottom: "40px",
             }}
           />
         )}
 
-        {/* Header Section */}
+        {/* Header */}
         <div
           style={{
             display: "flex",
             justifyContent: "space-between",
-            alignItems: "start",
-            gap: "30px",
+            gap: "40px",
+            flexWrap: "wrap",
+            alignItems: "flex-start",
           }}
         >
-          <div>
+          {/* Left */}
+          <div
+            style={{
+              flex: "1",
+              minWidth: "300px",
+            }}
+          >
             <span
               style={{
-                backgroundColor: "#EEF2FF",
-                color: "#2563EB",
-                padding: "6px 12px",
+                backgroundColor: "#E0F2FE",
+                color: "#075985",
+                border: "1px solid #BAE6FD",
+                padding: "7px 14px",
                 borderRadius: "999px",
-                fontSize: "12px",
+                fontSize: "13px",
+                fontWeight: "600",
               }}
             >
               {opportunity.category}
@@ -133,8 +163,12 @@ const { user } = useAuth();
 
             <h1
               style={{
-                color: "#1E3A5F",
-                marginTop: "20px",
+                color: "#0F172A",
+                fontSize: "40px",
+                lineHeight: "1.2",
+                marginTop: "16px",
+                marginBottom: "16px",
+                letterSpacing: "-0.5px",
               }}
             >
               {opportunity.title}
@@ -142,18 +176,21 @@ const { user } = useAuth();
 
             <p
               style={{
-                color: "#6B7280",
+                color: "#475569",
+                fontSize: "17px",
               }}
             >
               Posted by {opportunity.organizer?.name}
             </p>
           </div>
 
+          {/* Right Buttons */}
           <div
             style={{
               display: "flex",
               flexDirection: "column",
-              gap: "12px",
+              gap: "14px",
+              minWidth: "190px",
             }}
           >
             <button
@@ -164,13 +201,24 @@ const { user } = useAuth();
                   alert("Registration link not available.");
                 }
               }}
+              onMouseEnter={(e) => {
+                e.target.style.transform = "translateY(-2px)";
+                e.target.style.boxShadow = "0 8px 24px rgba(37,99,235,0.25)";
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.transform = "translateY(0)";
+                e.target.style.boxShadow = "none";
+              }}
               style={{
-                padding: "14px 24px",
+                padding: "15px 24px",
                 backgroundColor: "#2563EB",
-                color: "white",
+                color: "#FFFFFF",
                 border: "none",
-                borderRadius: "10px",
+                borderRadius: "12px",
                 cursor: "pointer",
+                fontSize: "15px",
+                fontWeight: "600",
+                transition: "all 0.2s ease",
               }}
             >
               Register Now
@@ -178,13 +226,22 @@ const { user } = useAuth();
 
             <button
               onClick={handleBookmark}
+              onMouseEnter={(e) => {
+                e.target.style.backgroundColor = "#d0edfa";
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.backgroundColor = "#FFFFFF";
+              }}
               style={{
-                padding: "14px 24px",
-                backgroundColor: "white",
-                color: "#1E3A5F",
-                border: "1px solid #D1D5DB",
-                borderRadius: "10px",
+                padding: "15px 24px",
+                backgroundColor: "#FFFFFF",
+                color: "#0F172A",
+                border: "1px solid #E2E8F0",
+                borderRadius: "12px",
                 cursor: "pointer",
+                fontSize: "15px",
+                fontWeight: "600",
+                transition: "all 0.2s ease",
               }}
             >
               Save Opportunity
@@ -197,38 +254,99 @@ const { user } = useAuth();
           style={{
             display: "flex",
             justifyContent: "space-between",
+            flexWrap: "wrap",
+            gap: "32px",
             marginTop: "40px",
-            paddingTop: "20px",
-            borderTop: "1px solid #E5E7EB",
-            borderBottom: "1px solid #E5E7EB",
-            paddingBottom: "20px",
+            padding: "30px 40px",
+            backgroundColor: "#FFFFFF",
+            border: "1px solid #E2E8F0",
+            borderRadius: "20px",
           }}
         >
           <div>
-            <h4>Deadline</h4>
-            <p>{new Date(opportunity.deadline).toLocaleDateString()}</p>
+            <h4
+              style={{
+                color: "#94A3B8",
+                fontSize: "14px",
+                fontWeight: "600",
+                marginBottom: "12px",
+                textTransform: "uppercase",
+                letterSpacing: "0.5px",
+              }}
+            >
+              Deadline
+            </h4>
+
+            <p
+              style={{
+                color: "#0F172A",
+                fontWeight: "500",
+              }}
+            >
+              {new Date(opportunity.deadline).toLocaleDateString()}
+            </p>
           </div>
 
           <div>
-            <h4>Category</h4>
-            <p>{opportunity.category}</p>
+            <h4
+              style={{
+                color: "#94A3B8",
+                fontSize: "14px",
+                fontWeight: "600",
+                marginBottom: "12px",
+                textTransform: "uppercase",
+                letterSpacing: "0.5px",
+              }}
+            >
+              Category
+            </h4>
+
+            <p
+              style={{
+                color: "#0F172A",
+                fontWeight: "500",
+              }}
+            >
+              {opportunity.category}
+            </p>
           </div>
 
           <div>
-            <h4>Organizer</h4>
-            <p>{opportunity.organizer?.name}</p>
+            <h4
+              style={{
+                color: "#94A3B8",
+                fontSize: "14px",
+                fontWeight: "600",
+                marginBottom: "12px",
+                textTransform: "uppercase",
+                letterSpacing: "0.5px",
+              }}
+            >
+              Organizer
+            </h4>
+
+            <p
+              style={{
+                color: "#0F172A",
+                fontWeight: "500",
+              }}
+            >
+              {opportunity.organizer?.name}
+            </p>
           </div>
         </div>
 
         {/* Description */}
         <div
           style={{
-            marginTop: "40px",
+            marginTop: "60px",
+            maxWidth: "900px",
           }}
         >
           <h2
             style={{
-              color: "#1E3A5F",
+              color: "#0F172A",
+              marginBottom: "24px",
             }}
           >
             About this opportunity
@@ -236,9 +354,10 @@ const { user } = useAuth();
 
           <p
             style={{
-              color: "#6B7280",
-              lineHeight: "1.8",
-              marginTop: "20px",
+              color: "#475569",
+              lineHeight: "2",
+              fontSize: "17px",
+              maxWidth: "820px",
             }}
           >
             {opportunity.description}

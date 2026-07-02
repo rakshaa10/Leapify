@@ -1,0 +1,78 @@
+/* ================= HERO SECTION ================= */
+
+@media (max-width: 640px) {
+  .hero-section {
+    padding: 40px 16px 48px !important;
+  }
+
+  .hero-title {
+    font-size: 42px !important;
+    line-height: 1.1 !important;
+    letter-spacing: -1px;
+  }
+
+  .hero-subtitle {
+    font-size: 16px !important;
+    line-height: 1.6 !important;
+  }
+}
+
+/* ================= SEARCH BAR ================= */
+
+@media (max-width: 640px) {
+  .search-container {
+    flex-direction: column !important;
+    width: 100% !important;
+  }
+
+  .search-input {
+    width: 100% !important;
+  }
+
+  .search-button {
+    width: 100% !important;
+  }
+}
+
+/* ================= CATEGORY FILTER ================= */
+
+@media (max-width: 640px) {
+  .category-container {
+    flex-wrap: nowrap !important;
+    overflow-x: auto;
+    justify-content: flex-start !important;
+    padding-bottom: 10px;
+    scrollbar-width: none;
+  }
+
+  .category-container::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* ================= OPPORTUNITY GRID ================= */
+
+@media (max-width: 640px) {
+  .opportunity-grid {
+    padding: 20px 12px !important;
+    gap: 20px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  nav {
+    padding: 14px 12px !important;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  nav a:first-child {
+    font-size: 18px !important;
+  }
+
+  nav > div {
+    gap: 8px !important;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}

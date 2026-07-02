@@ -55,6 +55,7 @@ const BookmarksPage = () => {
           style={{
             textAlign: "center",
             marginTop: "100px",
+            color: "#0F172A",
           }}
         >
           Loading bookmarks...
@@ -72,13 +73,23 @@ const BookmarksPage = () => {
           maxWidth: "900px",
           margin: "40px auto",
           padding: "20px",
+          backgroundColor: "#F0F4F8",
+          minHeight: "100vh",
         }}
       >
-        <h1>Your Bookmarks</h1>
+        <h1
+          style={{
+            color: "#0F172A",
+            marginBottom: "25px",
+          }}
+        >
+          Your Bookmarks
+        </h1>
 
         <p
           style={{
-            color: "#6B7280",
+            color: "#475569",
+            padding: "10px 10px",
             marginBottom: "30px",
           }}
         >
@@ -86,7 +97,13 @@ const BookmarksPage = () => {
         </p>
 
         {bookmarks.length === 0 ? (
-          <h3>No bookmarks yet.</h3>
+          <h3
+            style={{
+              color: "#475569",
+            }}
+          >
+            No bookmarks yet.
+          </h3>
         ) : (
           bookmarks.map((bookmark) => (
             <Link
@@ -99,17 +116,44 @@ const BookmarksPage = () => {
             >
               <div
                 style={{
-                  border: "1px solid #ccc",
-                  padding: "20px",
+                  backgroundColor: "#FFFFFF",
+                  border: "1px solid #E2E8F0",
+                  padding: "24px",
                   marginBottom: "20px",
-                  borderRadius: "10px",
+                  borderRadius: "14px",
                 }}
               >
-                <h3>{bookmark.opportunity.title}</h3>
+                <h2
+                  style={{
+                    color: "#0F172A",
+                    marginBottom: "16px",
+                  }}
+                >
+                  {bookmark.opportunity.title}
+                </h2>
 
-                <p>{bookmark.opportunity.category}</p>
+                <span
+                  style={{
+                    display: "inline-block",
+                    backgroundColor: "#E0EAFF",
+                    color: "#1D4ED8",
+                    padding: "3px 10px",
+                    borderRadius: "999px",
+                    fontSize: "12px",
+                    fontWeight: "500",
+                    marginBottom: "16px",
+                  }}
+                >
+                  {bookmark.opportunity.category}
+                </span>
 
-                <p>
+                <p
+                  style={{
+                    color: "#2563EB",
+                    fontWeight: "600",
+                    marginBottom: "18px",
+                  }}
+                >
                   Closes{" "}
                   {new Date(bookmark.opportunity.deadline).toLocaleDateString()}
                 </p>
@@ -120,6 +164,15 @@ const BookmarksPage = () => {
                     e.stopPropagation();
 
                     removeBookmark(bookmark.opportunity.id);
+                  }}
+                  style={{
+                    backgroundColor: "#FEE2E2",
+                    color: "#DC2626",
+                    border: "1px solid #FECACA",
+                    borderRadius: "6px",
+                    padding: "8px 14px",
+                    cursor: "pointer",
+                    fontWeight: "500",
                   }}
                 >
                   Remove Bookmark

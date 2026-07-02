@@ -10,13 +10,27 @@ const OpportunityCard = ({ opportunity }) => {
       }}
     >
       <div
+        onMouseEnter={(e) => {
+          e.currentTarget.style.transform = "translateY(-6px)";
+          e.currentTarget.style.boxShadow = "0 16px 40px rgba(15,23,42,0.12)";
+          e.currentTarget.style.borderColor = "#93C5FD";
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.transform = "translateY(0)";
+          e.currentTarget.style.boxShadow = "0 8px 24px rgba(15,23,42,0.08)";
+          e.currentTarget.style.borderColor = "#E2E8F0";
+        }}
         style={{
-          backgroundColor: "#F8F9FB",
-          borderRadius: "16px",
+          backgroundColor: "#FFFFFF",
+          borderRadius: "18px",
           overflow: "hidden",
-          border: "1px solid #E5E7EB",
-          width: "320px",
-          marginTop: "60px",
+          border: "1px solid #E2E8F0",
+          width: "100%",
+          maxWidth: "320px",
+          marginTop: "20px",
+          boxShadow: "0 8px 24px rgba(15,23,42,0.08)",
+          transition: "all 0.25s ease",
+          cursor: "pointer",
         }}
       >
         {/* Banner */}
@@ -26,36 +40,35 @@ const OpportunityCard = ({ opportunity }) => {
             alt={opportunity.title}
             style={{
               width: "100%",
-              height: "160px",
+              height: "90px",
               objectFit: "contain",
               backgroundColor: "#FFFFFF",
-              // borderRadius: "20px",
-              // marginBottom: "30px",
             }}
           />
         ) : (
           <div
             style={{
-              height: "250px",
+              height: "110px",
               backgroundColor: "#2563EB",
-              borderRadius: "20px",
-              marginBottom: "30px",
             }}
-          ></div>
+          />
         )}
+
         {/* Content */}
         <div
           style={{
             padding: "20px",
+            borderTop: "1px solid #E2E8F0",
           }}
         >
           <span
             style={{
-              backgroundColor: "#EEF2FF",
-              color: "#2563EB",
-              padding: "4px 10px",
+              backgroundColor: "#E0EAFF",
+              color: "#1D4ED8",
+              padding: "5px 12px",
               borderRadius: "999px",
               fontSize: "12px",
+              fontWeight: "500",
             }}
           >
             {opportunity.category}
@@ -63,8 +76,12 @@ const OpportunityCard = ({ opportunity }) => {
 
           <h3
             style={{
-              marginTop: "16px",
-              color: "#1E3A5F",
+              marginTop: "20px",
+              color: "#0F172A",
+              fontSize: "21.5px",
+              fontWeight: "700",
+              lineHeight: "1.25",
+              minHeight: "78px",
             }}
           >
             {opportunity.title}
@@ -72,7 +89,10 @@ const OpportunityCard = ({ opportunity }) => {
 
           <p
             style={{
-              color: "#6B7280",
+              color: "#475569",
+              fontSize: "16px",
+              minHeight: "24px",
+              marginTop: "20px",
             }}
           >
             {opportunity.organizer}
@@ -80,9 +100,10 @@ const OpportunityCard = ({ opportunity }) => {
 
           <p
             style={{
-              marginTop: "16px",
+              marginTop: "2px",
               color: "#2563EB",
               fontWeight: "600",
+              fontSize: "16px",
             }}
           >
             Closes {opportunity.deadline}

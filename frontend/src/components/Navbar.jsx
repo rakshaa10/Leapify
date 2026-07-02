@@ -3,18 +3,18 @@ import { useAuth } from "../context/AuthContext";
 
 const navLinkStyle = {
   textDecoration: "none",
-  color: "#93C5FD",
+  color: "#0F172A",
   fontWeight: "500",
   fontSize: "16px",
 };
 
 const actionButtonStyle = {
   textDecoration: "none",
-  padding: "8px 16px",
+  padding: "16px 20px",
   borderRadius: "8px",
-  border: "1px solid #374151",
-  backgroundColor: "#1F2937",
-  color: "#F3F4F6",
+  border: "1px solid #E2E8F0",
+  backgroundColor: "#FFFFFF",
+  color: "#0F172A",
   fontSize: "14px",
   fontWeight: "500",
   cursor: "pointer",
@@ -29,8 +29,9 @@ const Navbar = () => {
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
-        padding: "16px 40px",
-        borderBottom: "1px solid #374151",
+        padding: "16px 20px",
+        borderBottom: "1px solid #E2E8F0",
+        backgroundColor: "#FFFFFF",
       }}
     >
       <Link
@@ -82,10 +83,10 @@ const Navbar = () => {
 
             <div
               style={{
-                color: "#F3F4F6",
+                color: "#1D4ED8",
                 fontWeight: "600",
                 padding: "8px 12px",
-                backgroundColor: "#1F2937",
+                backgroundColor: "#EFF6FF",
                 borderRadius: "999px",
               }}
             >

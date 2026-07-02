@@ -61,7 +61,7 @@ const DashboardPage = () => {
           style={{
             textAlign: "center",
             marginTop: "100px",
-            color: "#FFFFFF",
+            color: "#0F172A",
           }}
         >
           Loading dashboard...
@@ -79,25 +79,15 @@ const DashboardPage = () => {
           maxWidth: "900px",
           margin: "50px auto",
           padding: "20px",
+          backgroundColor: "#F0F4F8",
+          minHeight: "100vh",
         }}
       >
-        {/* Page Label */}
-        <p
-          style={{
-            color: "#6B7280",
-            fontSize: "12px",
-            textTransform: "uppercase",
-            letterSpacing: "1px",
-          }}
-        >
-          ORGANIZER — /DASHBOARD
-        </p>
-
         {/* Heading */}
         <h1
           style={{
             marginTop: "15px",
-            color: "#FFFFFF",
+            color: "#0F172A",
             fontSize: "42px",
           }}
         >
@@ -106,7 +96,7 @@ const DashboardPage = () => {
 
         <p
           style={{
-            color: "#9CA3AF",
+            color: "#475569",
             marginTop: "8px",
             marginBottom: "30px",
           }}
@@ -120,7 +110,7 @@ const DashboardPage = () => {
             style={{
               padding: "14px 24px",
               backgroundColor: "#2563EB",
-              color: "white",
+              color: "#FFFFFF",
               border: "none",
               borderRadius: "10px",
               cursor: "pointer",
@@ -138,13 +128,14 @@ const DashboardPage = () => {
             style={{
               textAlign: "center",
               padding: "60px 20px",
-              border: "1px dashed #4B5563",
+              border: "1px dashed #CBD5E1",
               borderRadius: "14px",
+              backgroundColor: "#FFFFFF",
             }}
           >
             <h2
               style={{
-                color: "#FFFFFF",
+                color: "#0F172A",
                 marginBottom: "10px",
               }}
             >
@@ -153,7 +144,7 @@ const DashboardPage = () => {
 
             <p
               style={{
-                color: "#9CA3AF",
+                color: "#475569",
                 marginBottom: "25px",
               }}
             >
@@ -165,7 +156,7 @@ const DashboardPage = () => {
                 style={{
                   padding: "12px 20px",
                   backgroundColor: "#2563EB",
-                  color: "white",
+                  color: "#FFFFFF",
                   border: "none",
                   borderRadius: "10px",
                   cursor: "pointer",
@@ -187,8 +178,8 @@ const DashboardPage = () => {
               <div
                 key={opportunity.id}
                 style={{
-                  backgroundColor: "#1F2937",
-                  border: "1px solid #374151",
+                  backgroundColor: "#FFFFFF",
+                  border: "1px solid #E2E8F0",
                   borderRadius: "14px",
                   padding: "20px",
                   display: "flex",
@@ -205,7 +196,7 @@ const DashboardPage = () => {
                   >
                     <h3
                       style={{
-                        color: "white",
+                        color: "#0F172A",
                         marginBottom: "8px",
                         cursor: "pointer",
                       }}
@@ -216,7 +207,7 @@ const DashboardPage = () => {
 
                   <p
                     style={{
-                      color: "#9CA3AF",
+                      color: "#475569",
                     }}
                   >
                     {opportunity.category} •{" "}
@@ -235,9 +226,9 @@ const DashboardPage = () => {
                       style={{
                         padding: "10px 18px",
                         borderRadius: "8px",
-                        border: "1px solid #4B5563",
-                        backgroundColor: "#374151",
-                        color: "white",
+                        border: "1px solid #E2E8F0",
+                        backgroundColor: "#FFFFFF",
+                        color: "#475569",
                         cursor: "pointer",
                       }}
                     >
@@ -250,9 +241,9 @@ const DashboardPage = () => {
                     style={{
                       padding: "10px 18px",
                       borderRadius: "8px",
-                      border: "1px solid #4B5563",
-                      backgroundColor: "#DC2626",
-                      color: "white",
+                      border: "1px solid #FECACA",
+                      backgroundColor: "#FEE2E2",
+                      color: "#DC2626",
                       cursor: "pointer",
                     }}
                   >

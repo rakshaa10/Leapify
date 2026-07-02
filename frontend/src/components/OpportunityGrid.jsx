@@ -33,8 +33,9 @@ const OpportunityGrid = ({ search, category }) => {
         style={{
           textAlign: "center",
           padding: "80px",
-          color: "#6B7280",
+          color: "#475569",
           fontSize: "18px",
+          backgroundColor: "#F0F4F8",
         }}
       >
         Loading opportunities...
@@ -45,54 +46,62 @@ const OpportunityGrid = ({ search, category }) => {
   return (
     <div
       style={{
-        display: "grid",
-        gridTemplateColumns: "repeat(auto-fit, minmax(320px, 320px))",
-        gap: "32px",
-        padding: "60px 40px",
-        justifyContent: "center",
-        maxWidth: "1600px",
-        margin: "0 auto",
+        backgroundColor: "#F0F4F8",
+        width: "100%",
       }}
     >
-      {opportunities.length === 0 ? (
-        <div
-          style={{
-            textAlign: "center",
-            padding: "60px",
-            width: "100%",
-          }}
-        >
-          <h2
+      <div
+        className="opportunity-grid"
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(280px, 320px))",
+          gap: "24px",
+          padding: "40px 20px",
+
+          justifyContent: "center",
+
+          maxWidth: "1600px",
+          margin: "0 auto",
+        }}
+      >
+        {opportunities.length === 0 ? (
+          <div
             style={{
-              color: "#1E3A5F",
-              marginBottom: "12px",
+              textAlign: "center",
+              padding: "60px",
+              width: "100%",
             }}
           >
-            No opportunities found
-          </h2>
+            <h2
+              style={{
+                color: "#0F172A",
+                marginBottom: "12px",
+              }}
+            >
+              No opportunities found
+            </h2>
 
-          <p
-            style={{
-              color: "#6B7280",
-            }}
-          >
-            Try changing your search keyword or category filter.
-          </p>
-        </div>
-      ) : (
-        opportunities.map((opportunity) => (
-          <OpportunityCard
-            key={opportunity.id}
-            opportunity={{
-              ...opportunity,
-
-              organizer: opportunity.organizer?.name || "Unknown Organizer",
-
-              deadline: new Date(opportunity.deadline).toLocaleDateString(),
-            }}
-          />
-        ))
-      )}
+            <p
+              style={{
+                color: "#475569",
+              }}
+            >
+              Try changing your search keyword or category filter.
+            </p>
+          </div>
+        ) : (
+          opportunities.map((opportunity) => (
+            <OpportunityCard
+              key={opportunity.id}
+              opportunity={{
+                ...opportunity,
+                organizer: opportunity.organizer?.name || "Unknown Organizer",
+                deadline: new Date(opportunity.deadline).toLocaleDateString(),
+              }}
+            />
+          ))
+        )}
+      </div>
     </div>
   );
 };

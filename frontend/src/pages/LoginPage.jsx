@@ -31,109 +31,153 @@ const LoginPage = () => {
   return (
     <div
       style={{
-        maxWidth: "420px",
-        margin: "80px auto",
-        padding: "32px",
-        border: "1px solid #E5E7EB",
-        borderRadius: "12px",
-        backgroundColor: "#F8F9FB",
+        minHeight: "100vh",
+        backgroundColor: "#F0F4F8",
+        padding: "60px 20px",
+        boxSizing: "border-box",
       }}
     >
       <div
         style={{
-          fontSize: "11px",
-          textTransform: "uppercase",
-          color: "#9CA3AF",
-          marginBottom: "24px",
+          maxWidth: "420px",
+          margin: "0 auto",
+          padding: "32px",
+          border: "1px solid #E2E8F0",
+          borderRadius: "12px",
+          backgroundColor: "#FFFFFF",
         }}
       >
-        Login page — /login
-      </div>
-
-      <div
-        style={{
-          fontSize: "24px",
-          fontWeight: "600",
-          marginBottom: "32px",
-        }}
-      >
-        Opport<span style={{ color: "#2563EB" }}>unity</span>Hub
-      </div>
-
-      <h2
-        style={{
-          fontSize: "28px",
-          marginBottom: "6px",
-        }}
-      >
-        Welcome back
-      </h2>
-
-      <p
-        style={{
-          color: "#6B7280",
-          marginBottom: "28px",
-        }}
-      >
-        Sign in to your account
-      </p>
-
-      <form onSubmit={handleSubmit}>
-        <div style={{ marginBottom: "16px" }}>
-          <label>Email address</label>
-
-          <input
-            type="email"
-            placeholder="you@nitrr.ac.in"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-
-        <div style={{ marginBottom: "20px" }}>
-          <label>Password</label>
-
-          <input
-            type="password"
-            placeholder="••••••••"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-
-        <button
-          type="submit"
+        <div
           style={{
-            width: "100%",
-            padding: "12px",
-            backgroundColor: "#2563EB",
-            color: "white",
-            border: "none",
-            borderRadius: "8px",
-            cursor: "pointer",
+            fontSize: "24px",
+            fontWeight: "600",
+            marginBottom: "32px",
+            color: "#0F172A",
           }}
         >
-          Sign in
-        </button>
-      </form>
+          Opport<span style={{ color: "#2563EB" }}>unity</span>Hub
+        </div>
 
-      <div
-        style={{
-          textAlign: "center",
-          margin: "20px 0",
-          color: "#9CA3AF",
-        }}
-      >
-        —
-      </div>
+        <h2
+          style={{
+            fontSize: "28px",
+            marginBottom: "6px",
+            color: "#0F172A",
+          }}
+        >
+          Welcome back
+        </h2>
 
-      <div
-        style={{
-          textAlign: "center",
-          color: "#6B7280",
-        }}
-      >
-        Don't have an account? <Link to="/register">Register</Link>
+        <p
+          style={{
+            color: "#475569",
+            marginBottom: "28px",
+          }}
+        >
+          Sign in to your account
+        </p>
+
+        <form onSubmit={handleSubmit}>
+          <div style={{ marginBottom: "16px" }}>
+            <label
+              style={{
+                color: "#475569",
+              }}
+            >
+              Email address
+            </label>
+
+            <input
+              type="email"
+              placeholder="you@nitrr.ac.in"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              style={{
+                width: "100%",
+                marginTop: "8px",
+                padding: "12px 14px",
+                borderRadius: "8px",
+                border: "1px solid #CBD5E1",
+                backgroundColor: "#F8FAFC",
+                color: "#0F172A",
+                boxSizing: "border-box",
+                outline: "none",
+              }}
+            />
+          </div>
+
+          <div style={{ marginBottom: "20px" }}>
+            <label
+              style={{
+                color: "#475569",
+              }}
+            >
+              Password
+            </label>
+
+            <input
+              type="password"
+              placeholder="••••••••"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              style={{
+                width: "100%",
+                marginTop: "8px",
+                padding: "12px 14px",
+                borderRadius: "8px",
+                border: "1px solid #CBD5E1",
+                backgroundColor: "#F8FAFC",
+                color: "#0F172A",
+                boxSizing: "border-box",
+                outline: "none",
+              }}
+            />
+          </div>
+
+          <button
+            type="submit"
+            style={{
+              width: "100%",
+              padding: "12px",
+              backgroundColor: "#2563EB",
+              color: "#FFFFFF",
+              border: "none",
+              borderRadius: "8px",
+              cursor: "pointer",
+            }}
+          >
+            Sign in
+          </button>
+        </form>
+
+        <div
+          style={{
+            textAlign: "center",
+            margin: "20px 0",
+            color: "#E2E8F0",
+          }}
+        >
+          —
+        </div>
+
+        <div
+          style={{
+            textAlign: "center",
+            color: "#475569",
+          }}
+        >
+          Don't have an account?{" "}
+          <Link
+            to="/register"
+            style={{
+              color: "#2563EB",
+              textDecoration: "none",
+              fontWeight: "500",
+            }}
+          >
+            Register
+          </Link>
+        </div>
       </div>
     </div>
   );
