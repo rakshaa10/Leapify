@@ -29,7 +29,7 @@ const Navbar = () => {
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
-        padding: "15px 40px",
+        padding: "16px 40px",
         borderBottom: "1px solid #374151",
       }}
     >
