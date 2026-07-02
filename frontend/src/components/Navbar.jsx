@@ -1,6 +1,25 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
+const navLinkStyle = {
+  textDecoration: "none",
+  color: "#93C5FD",
+  fontWeight: "500",
+  fontSize: "16px",
+};
+
+const actionButtonStyle = {
+  textDecoration: "none",
+  padding: "8px 16px",
+  borderRadius: "8px",
+  border: "1px solid #374151",
+  backgroundColor: "#1F2937",
+  color: "#F3F4F6",
+  fontSize: "14px",
+  fontWeight: "500",
+  cursor: "pointer",
+};
+
 const Navbar = () => {
   const { user, logout } = useAuth();
 
@@ -10,16 +29,16 @@ const Navbar = () => {
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
-        padding: "20px 40px",
-        borderBottom: "1px solid #e5e7eb",
+        padding: "15px 40px",
+        borderBottom: "1px solid #374151",
       }}
     >
       <Link
         to="/"
         style={{
           textDecoration: "none",
-          fontSize: "24px",
-          fontWeight: "bold",
+          fontSize: "30px",
+          fontWeight: "700",
           color: "#2563EB",
         }}
       >
@@ -35,22 +54,43 @@ const Navbar = () => {
       >
         {!user && (
           <>
-            <Link to="/login">Login</Link>
-            <Link to="/register">Register</Link>
+            <Link to="/login" style={actionButtonStyle}>
+              Login
+            </Link>
+
+            <Link to="/register" style={actionButtonStyle}>
+              Register
+            </Link>
           </>
         )}
 
         {user && (
           <>
             {user.role === "ORGANIZER" && (
-              <Link to="/dashboard">Dashboard</Link>
+              <Link to="/dashboard" style={navLinkStyle}>
+                Dashboard
+              </Link>
             )}
 
-            <Link to="/bookmarks">Bookmarks</Link>
+            <Link to="/bookmarks" style={navLinkStyle}>
+              Bookmarks
+            </Link>
 
-            <button onClick={logout}>Logout</button>
+            <button onClick={logout} style={actionButtonStyle}>
+              Logout
+            </button>
 
-            <div>{user.name}</div>
+            <div
+              style={{
+                color: "#F3F4F6",
+                fontWeight: "600",
+                padding: "8px 12px",
+                backgroundColor: "#1F2937",
+                borderRadius: "999px",
+              }}
+            >
+              {user.name}
+            </div>
           </>
         )}
       </div>

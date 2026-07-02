@@ -45,11 +45,13 @@ const OpportunityGrid = ({ search, category }) => {
   return (
     <div
       style={{
-        display: "flex",
-        flexWrap: "wrap",
-        gap: "24px",
-        justifyContent: "center",
+        display: "grid",
+        gridTemplateColumns: "repeat(auto-fit, minmax(320px, 320px))",
+        gap: "32px",
         padding: "60px 40px",
+        justifyContent: "center",
+        maxWidth: "1600px",
+        margin: "0 auto",
       }}
     >
       {opportunities.length === 0 ? (

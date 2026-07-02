@@ -20,13 +20,29 @@ const OpportunityCard = ({ opportunity }) => {
         }}
       >
         {/* Banner */}
-        <div
-          style={{
-            height: "160px",
-            backgroundColor: "#2563EB",
-          }}
-        ></div>
-
+        {opportunity.bannerUrl ? (
+          <img
+            src={opportunity.bannerUrl}
+            alt={opportunity.title}
+            style={{
+              width: "100%",
+              height: "160px",
+              objectFit: "contain",
+              backgroundColor: "#FFFFFF",
+              // borderRadius: "20px",
+              // marginBottom: "30px",
+            }}
+          />
+        ) : (
+          <div
+            style={{
+              height: "250px",
+              backgroundColor: "#2563EB",
+              borderRadius: "20px",
+              marginBottom: "30px",
+            }}
+          ></div>
+        )}
         {/* Content */}
         <div
           style={{

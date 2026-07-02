@@ -16,6 +16,8 @@ const CreateOpportunityPage = () => {
   const [deadline, setDeadline] = useState("");
   const [description, setDescription] = useState("");
   const [registrationLink, setRegistrationLink] = useState("");
+  const [banner, setBanner] = useState(null);
+
 
   useEffect(() => {
     const fetchOpportunity = async () => {
@@ -41,44 +43,37 @@ const CreateOpportunityPage = () => {
 
   const handleSubmit = async () => {
     try {
+      const formData = new FormData();
+
+      formData.append("title", title);
+      formData.append("category", category);
+      formData.append("deadline", deadline);
+      formData.append("description", description);
+      formData.append("registrationLink", registrationLink);
+
+      if (banner) {
+        formData.append("banner", banner);
+      }
+
       if (isEditMode) {
-        await axios.put(
-          `/opportunities/${id}`,
-          {
-            title,
-            category,
-            deadline,
-            description,
-            registrationLink,
+        await axios.put(`/opportunities/${id}`, formData, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            
           },
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          },
-        );
+        });
 
         alert("Opportunity updated successfully");
       } else {
-        await axios.post(
-          "/opportunities",
-          {
-            title,
-            category,
-            deadline,
-            description,
-            registrationLink,
+        await axios.post("/opportunities", formData, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          
           },
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          },
-        );
+        });
 
         alert("Opportunity created successfully");
       }
-
 
       navigate("/dashboard");
     } catch (error) {
@@ -258,25 +253,42 @@ const CreateOpportunityPage = () => {
           />
         </div>
 
-        {/* Banner Upload Placeholder */}
+        {/* Banner Upload */}
         <div style={{ marginBottom: "30px" }}>
-          <label style={{ display: "block", marginBottom: "8px" }}>
+          <label
+            style={{
+              display: "block",
+              marginBottom: "8px",
+            }}
+          >
             Banner image
           </label>
 
-          <div
+          <input
+            type="file"
+            accept="image/*"
+            onChange={(e) => setBanner(e.target.files[0])}
             style={{
-              border: "2px dashed #4B5563",
-              borderRadius: "12px",
-              padding: "40px",
-              textAlign: "center",
-              color: "#9CA3AF",
+              width: "100%",
+              padding: "12px",
+              borderRadius: "10px",
+              border: "1px solid #374151",
+              backgroundColor: "#1F2937",
+              color: "white",
             }}
-          >
-            Click to upload or drag and drop
-            <br />
-            PNG or JPG, max 2MB
-          </div>
+          />
+
+          {banner && (
+            <p
+              style={{
+                color: "#9CA3AF",
+                marginTop: "10px",
+                fontSize: "14px",
+              }}
+            >
+              ✓ Selected: {banner.name}
+            </p>
+          )}
         </div>
 
         {/* Buttons */}

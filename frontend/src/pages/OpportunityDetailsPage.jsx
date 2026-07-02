@@ -84,15 +84,30 @@ const { user } = useAuth();
           ← Back to opportunities
         </p>
 
-        {/* Banner */}
-        <div
-          style={{
-            height: "250px",
-            backgroundColor: "#2563EB",
-            borderRadius: "20px",
-            marginBottom: "30px",
-          }}
-        ></div>
+        {opportunity.bannerUrl ? (
+          <img
+            src={opportunity.bannerUrl}
+            alt={opportunity.title}
+            style={{
+              width: "100%",
+              height: "250px",
+              objectFit: "cover",
+              borderRadius: "20px",
+              marginBottom: "30px",
+              cursor: "pointer",
+              transition: "0.2s ease",
+            }}
+          />
+        ) : (
+          <div
+            style={{
+              height: "250px",
+              backgroundColor: "#2563EB",
+              borderRadius: "20px",
+              marginBottom: "30px",
+            }}
+          />
+        )}
 
         {/* Header Section */}
         <div

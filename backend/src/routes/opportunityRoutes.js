@@ -11,6 +11,7 @@ const {
 
 const authMiddleware = require("../middleware/authMiddleware");
 const roleMiddleware = require("../middleware/roleMiddleware");
+const upload = require("../middleware/uploadMiddleware");
 
 const router = express.Router();
 
@@ -29,18 +30,14 @@ router.get("/:id", getOpportunityById);
 
 // ==================== Organizer Routes ====================
 
+
+
 router.post(
   "/",
   authMiddleware,
   roleMiddleware("ORGANIZER"),
+  upload.single("banner"),
   createOpportunity,
-);
-
-router.put(
-  "/:id",
-  authMiddleware,
-  roleMiddleware("ORGANIZER"),
-  updateOpportunity,
 );
 
 router.delete(

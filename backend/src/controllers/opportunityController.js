@@ -1,4 +1,6 @@
 const prisma = require("../lib/prisma");
+const cloudinary = require("../config/cloudinary");
+const streamifier = require("streamifier");
 
 const getAllOpportunities = async (req, res) => {
   try {
@@ -86,15 +88,29 @@ const getOpportunityById = async (req, res) => {
 
 const createOpportunity = async (req, res) => {
   try {
-    const {
-      title,
-      description,
-      category,
-      deadline,
-      registrationLink,
-      bannerUrl,
-    } = req.body;
+    console.log("req.body =", req.body);
+    console.log("req.file =", req.file);
+    const { title, description, category, deadline, registrationLink } =
+      req.body;
+    let bannerUrl = null;
 
+    if (req.file) {
+      const result = await new Promise((resolve, reject) => {
+        const stream = cloudinary.uploader.upload_stream(
+          {
+            folder: "opportunity-hub",
+          },
+          (error, result) => {
+            if (error) reject(error);
+            else resolve(result);
+          },
+        );
+
+        streamifier.createReadStream(req.file.buffer).pipe(stream);
+      });
+
+      bannerUrl = result.secure_url;
+    }
     const opportunity = await prisma.opportunity.create({
       data: {
         title,
