@@ -1,4 +1,4 @@
-# 🚀 Leapify — Campus Opportunity Hub
+# 🚀 Leapify - Opportunity Listing Platform
 
 Leapify is a full-stack platform designed to centralize campus opportunities such as hackathons, internships, workshops, scholarships, competitions, and club recruitments in one place.
 
@@ -142,6 +142,6 @@ CLOUDINARY_API_SECRET=
 
 
 - GitHub: https://github.com/rakshaa10
-- LinkedIn: Add your LinkedIn profile here
+- LinkedIn: https://www.linkedin.com/in/raksha-sahu/
 
 ---
