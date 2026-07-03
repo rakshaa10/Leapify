@@ -43,7 +43,7 @@ const Navbar = () => {
           color: "#2563EB",
         }}
       >
-        OpportunityHub
+        Leapify
       </Link>
 
       <div

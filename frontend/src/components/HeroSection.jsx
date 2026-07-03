@@ -6,8 +6,8 @@ const HeroSection = ({ search, setSearch, category, setCategory }) => {
     <section
       className="hero-section"
       style={{
-        padding: "60px 20px",
-        backgroundColor: "#EBF2FF", // Hero background
+        padding: "130px 20px",
+        backgroundColor: "#d1dff8", // Hero background
         textAlign: "center",
       }}
     >

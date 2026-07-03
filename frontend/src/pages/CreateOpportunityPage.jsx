@@ -90,16 +90,29 @@ const CreateOpportunityPage = () => {
         style={{
           maxWidth: "700px",
           margin: "40px auto",
-          padding: "20px",
+          padding: "32px",
+          backgroundColor: "#FFFFFF",
+          border: "1px solid #E2E8F0",
+          borderRadius: "16px",
+          boxShadow: "0 8px 24px rgba(15,23,42,0.04)",
         }}
       >
         {/* Back button */}
         <Link
           to="/dashboard"
           style={{
-            color: "#6B7280",
-            textDecoration: "none",
-            fontSize: "14px",
+            display: "inline-flex",
+            alignItems: "center",
+            gap: "8px",
+            padding: "10px 18px",
+            border: "1px solid #E2E8F0",
+            borderRadius: "12px",
+            backgroundColor: "#FFFFFF",
+            color: "#475569",
+            fontWeight: "500",
+            cursor: "pointer",
+            marginBottom: "32px",
+            transition: "all 0.2s ease",
           }}
         >
           ← Back to dashboard
@@ -114,8 +127,8 @@ const CreateOpportunityPage = () => {
         >
           <h1
             style={{
-              color: "#FFFFFF",
-              marginBottom: "8px",
+              color: "#0F172A",
+              marginBottom: "30px",
             }}
           >
             {isEditMode ? "Edit opportunity" : "Post an opportunity"}
@@ -123,7 +136,7 @@ const CreateOpportunityPage = () => {
 
           <p
             style={{
-              color: "#9CA3AF",
+              color: "#475569",
             }}
           >
             {isEditMode
@@ -134,7 +147,15 @@ const CreateOpportunityPage = () => {
 
         {/* Title */}
         <div style={{ marginBottom: "20px" }}>
-          <label style={{ display: "block", marginBottom: "8px" }}>Title</label>
+          <label
+            style={{
+              display: "block",
+              marginBottom: "8px",
+              color: "#475569",
+            }}
+          >
+            Title
+          </label>
 
           <input
             type="text"
@@ -145,9 +166,15 @@ const CreateOpportunityPage = () => {
               width: "100%",
               padding: "12px",
               borderRadius: "10px",
-              border: "1px solid #374151",
-              backgroundColor: "#1F2937",
-              color: "white",
+              border: "1px solid #CBD5E1",
+              backgroundColor: "#FFFFFF",
+              color: "#0F172A",
+            }}
+            onFocus={(e) => {
+              e.target.style.borderColor = "#93C5FD";
+            }}
+            onBlur={(e) => {
+              e.target.style.borderColor = "#CBD5E1";
             }}
           />
         </div>
@@ -162,7 +189,13 @@ const CreateOpportunityPage = () => {
           }}
         >
           <div>
-            <label style={{ display: "block", marginBottom: "8px" }}>
+            <label
+              style={{
+                display: "block",
+                marginBottom: "8px",
+                color: "#475569",
+              }}
+            >
               Category
             </label>
 
@@ -173,9 +206,9 @@ const CreateOpportunityPage = () => {
                 width: "100%",
                 padding: "12px",
                 borderRadius: "10px",
-                border: "1px solid #374151",
-                backgroundColor: "#1F2937",
-                color: "white",
+                border: "1px solid #CBD5E1",
+                backgroundColor: "#FFFFFF",
+                color: "#0F172A",
               }}
             >
               <option value="HACKATHON">Hackathon</option>
@@ -188,7 +221,13 @@ const CreateOpportunityPage = () => {
           </div>
 
           <div>
-            <label style={{ display: "block", marginBottom: "8px" }}>
+            <label
+              style={{
+                display: "block",
+                marginBottom: "8px",
+                color: "#475569",
+              }}
+            >
               Application deadline
             </label>
 
@@ -200,9 +239,15 @@ const CreateOpportunityPage = () => {
                 width: "100%",
                 padding: "12px",
                 borderRadius: "10px",
-                border: "1px solid #374151",
-                backgroundColor: "#1F2937",
-                color: "white",
+                border: "1px solid #CBD5E1",
+                backgroundColor: "#FFFFFF",
+                color: "#0F172A",
+              }}
+              onFocus={(e) => {
+                e.target.style.borderColor = "#93C5FD";
+              }}
+              onBlur={(e) => {
+                e.target.style.borderColor = "#CBD5E1";
               }}
             />
           </div>
@@ -210,7 +255,13 @@ const CreateOpportunityPage = () => {
 
         {/* Description */}
         <div style={{ marginBottom: "20px" }}>
-          <label style={{ display: "block", marginBottom: "8px" }}>
+          <label
+            style={{
+              display: "block",
+              marginBottom: "8px",
+              color: "#475569",
+            }}
+          >
             Description
           </label>
 
@@ -223,9 +274,9 @@ const CreateOpportunityPage = () => {
               width: "100%",
               padding: "12px",
               borderRadius: "10px",
-              border: "1px solid #374151",
-              backgroundColor: "#1F2937",
-              color: "white",
+              border: "1px solid #CBD5E1",
+              backgroundColor: "#FFFFFF",
+              color: "#0F172A",
               resize: "vertical",
             }}
           />
@@ -233,7 +284,13 @@ const CreateOpportunityPage = () => {
 
         {/* Registration link */}
         <div style={{ marginBottom: "20px" }}>
-          <label style={{ display: "block", marginBottom: "8px" }}>
+          <label
+            style={{
+              display: "block",
+              marginBottom: "8px",
+              color: "#475569",
+            }}
+          >
             Registration link
           </label>
 
@@ -246,9 +303,15 @@ const CreateOpportunityPage = () => {
               width: "100%",
               padding: "12px",
               borderRadius: "10px",
-              border: "1px solid #374151",
-              backgroundColor: "#1F2937",
-              color: "white",
+              border: "1px solid #CBD5E1",
+              backgroundColor: "#FFFFFF",
+              color: "#0F172A",
+            }}
+            onFocus={(e) => {
+              e.target.style.borderColor = "#93C5FD";
+            }}
+            onBlur={(e) => {
+              e.target.style.borderColor = "#CBD5E1";
             }}
           />
         </div>
@@ -259,6 +322,7 @@ const CreateOpportunityPage = () => {
             style={{
               display: "block",
               marginBottom: "8px",
+              color: "#475569",
             }}
           >
             Banner image
@@ -272,16 +336,22 @@ const CreateOpportunityPage = () => {
               width: "100%",
               padding: "12px",
               borderRadius: "10px",
-              border: "1px solid #374151",
-              backgroundColor: "#1F2937",
-              color: "white",
+              border: "1px solid #CBD5E1",
+              backgroundColor: "#FFFFFF",
+              color: "#0F172A",
+            }}
+            onFocus={(e) => {
+              e.target.style.borderColor = "#93C5FD";
+            }}
+            onBlur={(e) => {
+              e.target.style.borderColor = "#CBD5E1";
             }}
           />
 
           {banner && (
             <p
               style={{
-                color: "#9CA3AF",
+                color: "#475569",
                 marginTop: "10px",
                 fontSize: "14px",
               }}
@@ -304,10 +374,16 @@ const CreateOpportunityPage = () => {
               style={{
                 padding: "12px 20px",
                 borderRadius: "10px",
-                border: "1px solid #4B5563",
-                backgroundColor: "transparent",
-                color: "white",
+                border: "1px solid #E2E8F0",
+                backgroundColor: "#FFFFFF",
+                color: "#475569",
                 cursor: "pointer",
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.backgroundColor = "#F8FAFC";
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.backgroundColor = "#FFFFFF";
               }}
             >
               Cancel
@@ -323,6 +399,14 @@ const CreateOpportunityPage = () => {
               backgroundColor: "#2563EB",
               color: "white",
               cursor: "pointer",
+            }}
+            onMouseEnter={(e) => {
+              e.target.style.transform = "translateY(-2px)";
+              e.target.style.boxShadow = "0 8px 20px rgba(37,99,235,0.25)";
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.transform = "translateY(0)";
+              e.target.style.boxShadow = "none";
             }}
           >
             {isEditMode ? "Update Opportunity" : "Post Opportunity"}

@@ -55,7 +55,7 @@ const LoginPage = () => {
             color: "#0F172A",
           }}
         >
-          Opport<span style={{ color: "#2563EB" }}>unity</span>Hub
+          <span style={{ color: "#2563EB" }}>Leapify</span>
         </div>
 
         <h2
